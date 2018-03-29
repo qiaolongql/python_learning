@@ -283,7 +283,23 @@
            所以出现错误时,我们一定要分析错误的调用栈信息,才能定位错误的位置.
            我们也可以使用模块logging来记录错误信息,使程序可以继续执行(通过配置可输出到日志文件)
                import logging                       #导入logging模块
-               ...logging.exception(e)              #将捕获的错误信息输出到logging
+               except Exception as e:
+                   logging.exception(e)             #将捕获的错误信息输出到logging
+11、调试
+    <1>断言assert
+        语句:assert 判断表达式, 异常时输出信息               #当表达式为真时是true,否着抛出异常
+                                                         #AssertionError，其输出信息为定义
+        通过加-O参数来关闭断言
+    <2>logging
+        logging可以指定记录信息的级别,也可以将信息输出到文件等不同地方
+        改变级别:logging.basicConfig(level=logging.INFO/DEBUG/WARNING/ERROR)
+        输出:logging.info(信息)/debug()/warning()/error()
+    <3>pdb调试
+        通过在命令行(python -m pdb 文件名) 来使用pdb调试工具
+        import pdb  ->选定地点pdb.set_trace()来设置断点
+        l:查看代码 
+        n:单步执行下一条代码(默认显示的是要执行的下一条代码) 
+        p 变量名:打印变量值
 
 12、存储python数据结构
     使用json存储或读取配置文件等数据信息是比较常用的做法
