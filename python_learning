@@ -243,19 +243,29 @@
    鸭子类型:静态语言如java类型是严格匹配的，在python中并不要求严格的继承关系，一个对象只要看起来想鸭子，即实现了
             对象的某些方法即可当作某种对象进行传递使用(看起来像鸭子，走起路来像鸭子，就可以被当作鸭子)
 
-10、文件
-    读取文件：
-        with open(路径) as name:                    #with块用于让系统在合适时候自动关闭文件,也可手动用close()关闭
-            文件的相关操作                          #open用于打开文件并返回此打开的文件对象，as name用于给此对象命名
-                                                    #之后就可以用name访问此文件对象(对文件操作必须先打开文件并获得文件对象)
-        .read() 用于读取文件所有内容
-        .readlines() 以行读取文件内容，并将其作为一个列表返回(每行作为列表的一个元素)
-        或者用for line in file_object: 来遍历文件对象中的每一行
-    写入文件：
-        with open(路径,'w') as name:                #w写入操作  a追加操作 r只读操作 r+读写操作
-            文件的相关操作
-        .write() 写入内容(不会自动添加回车)
-
+10、同步IO
+    流stream是单向的,input stream是从网络/磁盘->内存,output stream内存->网络/磁盘
+    由于cpu和内存的存取速度远大于网络或磁盘,所以就出现了同步IO和异步IO
+    <1>文件操作(操作系统一般不允许外部直接操作磁盘,一般通过请求系统打开文件对象并通过系统提供的接口进行读取,python在内部进行了封装)
+        打开文件对象：
+            with open(路径,“打开方式rwab+”) as name:     #with块用于让系统在合适时候自动关闭文件,也可手动用close()关闭
+                文件的相关操作                           #open返回打开的文件对象，as name用于给此对象命名之后就可以
+                                                       #用name访问此文件对象(对文件操作必须先打开文件并获得文件对象)
+                                                       #w写入操作  a追加操作 r只读操作 b二进制方式
+        读取文件:
+            .read(size) 用于读取文件所有内容/size大小的内容   #文件小是可以一次读取
+            .readline() 返回一行                           
+            .readlines() 以行读取文件内容(返回列表)          #读取配置文件时按行读取
+            或者用for line in file_object: 来遍历文件对象中的每一行
+            open中可选参数还有:encoding="unicode",errors="ignore"
+        写入文件：
+            .write() 写入内容(不会自动添加回车)
+      <2>内存读写
+         StringIO:在内存中读写str,需要from io import StringIO
+                  需要常见以个StringIO对象f=StringIO()/用字符串作为初始化参数
+         BytesIO：在内存中读写bytes,需要from io import BytesIO
+                  先创建BytesIO对象f=BytesIO()/二进制作为初始化参数
+         之后二者就可以像文件一样使用了
 11、异常
     格式：try:                                      #try-except-else异常处理块一般用于依赖外部条件的处理
               可能出现异常的代码块                  #由于外部条件的不定导致可能出现异常，如用户输入、指定文件、网络连接等
@@ -320,7 +330,11 @@
     
     对于类的测试： 一般测试类就是测试类的方法,通过在类中定义 def setUp(self):方法并在其中实例化要测试的类对象
                    就可以在测试类中的其它单元测试上使用这个类对象了。
-                   测试类先执行setUp()方法-->然后执行test_ 开头的测试方法
+                   测试类先执行setUp()方法-->然后执行test_ 开头的测试方法-->最后执行tearDown()方法
+                   setUp()和tearDown()方法会在每个调用的测试方法前后分别执行
+    
+    运行单元测试:1、在代码中添加if __name__=__main__： unittest.main()来把测试文件当作正常python脚本执行
+               2、通过命令行python -m unittest 文件名
     
     常用断言：  assertEqual(a,b)     核实a==b
                 assertNotEqual(a,b)  
