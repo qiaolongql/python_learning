@@ -259,13 +259,31 @@
 11、异常
     格式：try:                                      #try-except-else异常处理块一般用于依赖外部条件的处理
               可能出现异常的代码块                  #由于外部条件的不定导致可能出现异常，如用户输入、指定文件、网络连接等
-          except excption：
+          except excption：                       #except块可以有多个用于捕获不同的异常
               异常时的处理块/pass                   #pass语句用于不做反映时使用
           else:
               未发生异常时候的处理块
-    常见exception： ZeroDivisionError 除0异常
-                    FileNotFoundError 文件未找到异常
-                    TypeError  类型错误异常
+          finally:                                #finally块可以没有
+              一定会被执行的代码
+    错误也是类:错误类之间的派生关系如下--
+              BaseException                       #所有错误类的基类/父类
+              +-- SystemExit
+              +-- KeyboardInterrupt
+              +-- GeneratorExit
+              +-- Exception(其他所有类都是它的子类)
+              
+              所以我们也可以定义自己的错误类,只需要让它继承上述错误类既可,捕获一个错误
+                  就是捕获一个错误类的实例,对于自定义错误类,想要抛出一个错误我们需要使
+                  用-> raise 错误类实例  的方式抛出一个错误类实例
+                  不带参数的实例会原样抛出except模块捕获的错误
+              常见exception： ZeroDivisionError 除0异常
+                             FileNotFoundError 文件未找到异常
+                             TypeError  类型错误异常
+    调用栈：错误如果没有被捕获,它会被一致向上抛出,最后被python解释器捕获,这些信息会被放在栈中
+           所以出现错误时,我们一定要分析错误的调用栈信息,才能定位错误的位置.
+           我们也可以使用模块logging来记录错误信息,使程序可以继续执行(通过配置可输出到日志文件)
+               import logging                       #导入logging模块
+               ...logging.exception(e)              #将捕获的错误信息输出到logging
 
 12、存储python数据结构
     使用json存储或读取配置文件等数据信息是比较常用的做法
