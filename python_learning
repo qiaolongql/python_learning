@@ -278,6 +278,18 @@
             open中可选参数还有:encoding="unicode",errors="ignore"
         写入文件：
             .write() 写入内容(不会自动添加回车)
+        文件内置属性和方法：
+          属性：
+              file.closed 文件是否关闭
+              file.mode  文件打开方式
+              file.name  文件名
+              file.softspace  末尾是否强制加空格
+          方法：    
+              打开文件会调用file object的内置方法__enter__()
+              关闭文件会调用file object的内置方法__exit__()
+              .seek(offset[,from]) 用于定位，offset要偏移的字节
+                  from：相对位置 0从开头 1从当前位置 2从末尾
+              .tell() 返回文件中指针当前位置
       <2>内存读写
          StringIO:在内存中读写str,需要from io import StringIO
                   需要常见以个StringIO对象f=StringIO()/用字符串作为初始化参数
