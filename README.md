@@ -1,5 +1,5 @@
 # python_learning
-tips about learing python
+
 0、杂项
 
     缩进使用4个空格不要使用制表符
@@ -109,7 +109,7 @@ tips about learing python
     向列表中添加列表元素时候需要特别注意，如x.append(y),y是列表，此时x[-1]和y同时指向这个元素列表
         所以当y未被新地址赋值之前改变y中元素的值会同时改变x[-1]中的值，应特别注意
 
-3、循环
+4、循环
 
     for x in 列表:
       代码体(循环代码体必须缩进)
@@ -120,7 +120,7 @@ tips about learing python
     while 条件:
         循环体
 
-4、条件判断
+5、条件判断
 
     关键字in和not in用于判断一个元素是否在一个列表中
     格式：  if 判断条件：
@@ -131,7 +131,7 @@ tips about learing python
                 执行语句
     因为else条件包含的范围太广，一般会用相应的elif语句代替以显示声明条件
 
-5、创建数字列表
+6、创建数字列表
 
     range(start,end,step) 以步step创建一系列数字(不包括end)
       用for x in range(s,e):来遍历生成的数字
@@ -151,14 +151,14 @@ tips about learing python
     列表[start:end] 返回一个列表的切片(不包括end)，start默认第一个元素，end默认包括最后一个元素
     列表[:] 复制列表(因为不写start和end默认为从头到尾)
 
-6、元组（元素不能改变的列表）()
+7、元组（元素不能改变的列表）()
 
     定义： 元组名=(元素，元素...)    yuanzu=(200,10)
     元组同列表一样，不过元组内的元素不能改变
     若想改变元组内的元素值，需要重新给元组变量赋值一次
     为了消除歧义(与运算符中的括号区分)，定义只有一个元素的元组时需要加上一个逗号，如yuanzu=(200,)
 
-7、字典（元素是键值对的列表）{}
+8、字典（元素是键值对的列表）{}
 
     格式： 字典={键:值,键:值,...}   zidian={}
             from collection import OrderedDict加载有序字典类
@@ -173,7 +173,7 @@ tips about learing python
     遍历键值对： for key,value in zidian.items():   #遍历键值对并将他们分别赋值给key 和 value俩个变量，从而遍历键值对
     通过key来查找value的算法叫hash算法，作为key的对象必须是不可变的如字符串、数字等
 
-8、函数
+9、函数
 
     格式：    def 函数名(参数列表):
                   函数体...
@@ -201,7 +201,7 @@ tips about learing python
         对于可变类型如list、dict、set等可修改对象,传入引用后若在函数中修改引用的内容，则会反映到
             原引用指向的对象中
     
-9、函数进阶
+10、函数进阶
 
     在python中一切都是对象，函数也不例外，所有函数都是一个function类的实例
     函数是一等对象: 
@@ -235,7 +235,7 @@ tips about learing python
             ·生成器函数 (使用yield关键字的函数和方法,返回生成器)
         使用内置方法 callable(名字) 来判断对象是否可调用
 
-9、迭代 生成器 迭代器
+11、迭代 生成器 迭代器
 
     可迭代对象：可以用for循环来遍历的，或可以用in/not in 关键自的都是可迭代的
         list、tuple、dict、set、str等都是可迭代对象
@@ -271,7 +271,7 @@ tips about learing python
             范围：生成器(generator)>迭代器(Iterator)>可迭代对象(Iterable)                
 
 
-9、类
+12、类
 
     格式：  class Man(object):                       #定义类,首字母必须大写python3中默认继承object
                 count=0                             #类属性，为类所有，在内存中只创建一次，所有实例都可访问
@@ -315,14 +315,14 @@ tips about learing python
     对于类属性，若为不可变类型(number,string,tuple),则在用实例调用类属性并修改时，由于改变了引用，这个
         引用将不再指向类属性，而会变成一个实例属性如 man.count=5时Man.count不变，man实例中的count属性为5
 
-9、多态和动态语言的鸭子类型
+13、多态和动态语言的鸭子类型
 
     多态:一个类的子类，在对其共有属性和方法进行操作时，子类可作为其父类类型进行传递，根据传入的类型不同进行子类的
         动态调用，从而保持了接口在面对不同子类时保持同样的接口，同时还能根据不同动态调用
     鸭子类型:静态语言如java类型是严格匹配的，在python中并不要求严格的继承关系，一个对象只要看起来想鸭子，即实现了
             对象的某些方法即可当作某种对象进行传递使用(看起来像鸭子，走起路来像鸭子，就可以被当作鸭子)
 
-10、同步IO
+14、同步IO
 
     流stream是单向的,input stream是从网络/磁盘->内存,output stream内存->网络/磁盘
     由于cpu和内存的存取速度远大于网络或磁盘,所以就出现了同步IO和异步IO
@@ -358,7 +358,7 @@ tips about learing python
          BytesIO：在内存中读写bytes,需要from io import BytesIO
                   先创建BytesIO对象f=BytesIO()/二进制作为初始化参数
          之后二者就可以像文件一样使用了
-11、异常
+15、异常
 
     格式：try:                                      #try-except-else异常处理块一般用于依赖外部条件的处理
               可能出现异常的代码块                  #由于外部条件的不定导致可能出现异常，如用户输入、指定文件、网络连接等
@@ -388,7 +388,7 @@ tips about learing python
                import logging                       #导入logging模块
                except Exception as e:
                    logging.exception(e)             #将捕获的错误信息输出到logging
-11、调试
+16、调试
 
     <1>断言assert
         语句:assert 判断表达式, 异常时输出信息               #当表达式为真时是true,否着抛出异常
@@ -407,14 +407,14 @@ tips about learing python
         n:单步执行下一条代码(默认显示的是要执行的下一条代码) 
         p 变量名:打印变量值
 
-12、存储python数据结构
+17、存储python数据结构
 
     使用json存储或读取配置文件等数据信息是比较常用的做法
     首先import json
         json.dump(数据,文件对象)  存储数据到文件中,一般json数据文件以.json后缀(应先打开文件)
         json.load(文件对象)     从文件对象中加载数据
 
-13、代码测试
+18、代码测试
 
     通过标准库中的unittest库来进行代码测试
     单元测试用于测试函数某个方面，测试用例由多个单元测试组成
@@ -441,7 +441,7 @@ tips about learing python
                 assertIn(item,list)  核实item在list中
                 assertNotIn(item,list)
 
-14、python解释器
+19、python解释器
 
     Cpython 默认的自带解释器，用C语言编写
     Ipython 以Cpython为底层的交互性解释器
@@ -450,7 +450,7 @@ tips about learing python
     IronPython  .Net平台python解释器，python代码->.Net字节码
     在java和.Net平台上最好使用网络调用，确保各程序之间的独立性
 
-15、linux下的python版本切换
+20、linux下的python版本切换
 
     使用工具update-alternatives
     update-alternatives --list python3   #列出与python3相关的列表
