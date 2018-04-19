@@ -1,0 +1,28 @@
+python主流开发框架
+    Djingo，Flask，bottle，Tornado，web2py，webpy
+python爬虫框架
+    scrapy
+python图形界面
+    pyqt，tkinter，wxpython
+python运维常用库
+    psutil 系统监控，分析和系统资源及进程管理
+    IPy 辅助IP规划
+    dnspython python实现的一个dns工具包
+    difflib python内置标准库，用于文本差异对比
+    filecmp 系统自带，实现文件、目录、遍历子目录的差异，对比功能
+    smtplib 发送电子邮件模块
+    pycurl  linux下curl命令的功能封装，支持ftp、http、https、telnet等
+    XLsxWriter 操作excel工作表
+    rrdtool  跟踪对象变化，生成变化走势图
+    scapy  交互式数据包处理程序，发送数据包，包嗅探应答反馈等功能
+    fabric 给予python实现的ssh命令行工具
+    CGIHTTPRequestHandler 实现对CGI的支持
+    ansible 一种集成IT系统的配置管理，应用部署，执行特定任务的开源平台
+    YAML  一种用来表达数据序列的编程语言
+    playbook 一个简单的配置管理和多主机部署系统
+    saltstack  一个服务器基础架构集中管理平台
+    func  为解决集群管理，监控问题需设计开发的系统管理基础框架
+python科学计算框架
+    numpy，scipy，pandas，matplotlib(可视化工具)
+python的3d游戏开发框架
+    Pygame，cocos2d
