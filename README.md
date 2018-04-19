@@ -1,6 +1,7 @@
 # python_learning
 tips about learing python
 0、杂项
+
     缩进使用4个空格不要使用制表符
     每行行宽不要超过80个字符
     在比较运算符的两边各加一个空格
@@ -40,6 +41,7 @@ tips about learing python
     
 
 0.1、编码
+
     ASCII码 1字节(Byte)包括英文字母、数字、符号
     Unicode 支持所有语言类型，一般大于等于两个字节，用两个字节表示一个字符(不同语言占空间不同)
     UTF-8   可变长编码，把一个unicode编码成1-6个字节 英文1个字节 汉字3个字节 特殊6个字节
@@ -57,6 +59,7 @@ tips about learing python
  
 
 1、字符串
+
     .lower() 小写
     .upper() 大写
     .title() 单词首字母大写
@@ -67,6 +70,7 @@ tips about learing python
     .format(参数1,参数2...)  用传入的参数替换字符串中的占位符{0},{1}等  #用于print是的字符串格式化
 
 2、数字
+
     应显式的用str()将数字转换为字符串再使用，用int()/float()将字符数值转换成数字后使用
     在python2中3/2=1会舍弃小数部分，若想正确输出小数需将其中之一置为浮点数
     在python3中/的结果永远是浮点数，//(地板除)的结果永远是整数
@@ -79,6 +83,7 @@ tips about learing python
     与或(^) 相同返回0 不同返回1 (一个数与全1与或等于对其每一位取反)
 
 3、列表 []
+
     格式:  列表=[元素,元素,...]  liebiao=[]
     给列表指定一个复数名称
     列表以[]表示，元素用逗号分割
@@ -105,6 +110,7 @@ tips about learing python
         所以当y未被新地址赋值之前改变y中元素的值会同时改变x[-1]中的值，应特别注意
 
 3、循环
+
     for x in 列表:
       代码体(循环代码体必须缩进)
 
@@ -115,6 +121,7 @@ tips about learing python
         循环体
 
 4、条件判断
+
     关键字in和not in用于判断一个元素是否在一个列表中
     格式：  if 判断条件：
                 执行语句
@@ -125,6 +132,7 @@ tips about learing python
     因为else条件包含的范围太广，一般会用相应的elif语句代替以显示声明条件
 
 5、创建数字列表
+
     range(start,end,step) 以步step创建一系列数字(不包括end)
       用for x in range(s,e):来遍历生成的数字
       或者用list(range(s,e))来生成列表
@@ -144,12 +152,14 @@ tips about learing python
     列表[:] 复制列表(因为不写start和end默认为从头到尾)
 
 6、元组（元素不能改变的列表）()
+
     定义： 元组名=(元素，元素...)    yuanzu=(200,10)
     元组同列表一样，不过元组内的元素不能改变
     若想改变元组内的元素值，需要重新给元组变量赋值一次
     为了消除歧义(与运算符中的括号区分)，定义只有一个元素的元组时需要加上一个逗号，如yuanzu=(200,)
 
 7、字典（元素是键值对的列表）{}
+
     格式： 字典={键:值,键:值,...}   zidian={}
             from collection import OrderedDict加载有序字典类
             然后通过zidian=OrderedDict()创建有序字典(根据添加顺序)
@@ -164,6 +174,7 @@ tips about learing python
     通过key来查找value的算法叫hash算法，作为key的对象必须是不可变的如字符串、数字等
 
 8、函数
+
     格式：    def 函数名(参数列表):
                   函数体...
     形参：函数定义时括号中定义的参数
@@ -191,6 +202,7 @@ tips about learing python
             原引用指向的对象中
     
 9、函数进阶
+
     在python中一切都是对象，函数也不例外，所有函数都是一个function类的实例
     函数是一等对象: 
         ·运行时创建
@@ -224,6 +236,7 @@ tips about learing python
         使用内置方法 callable(名字) 来判断对象是否可调用
 
 9、迭代 生成器 迭代器
+
     可迭代对象：可以用for循环来遍历的，或可以用in/not in 关键自的都是可迭代的
         list、tuple、dict、set、str等都是可迭代对象
 
@@ -259,6 +272,7 @@ tips about learing python
 
 
 9、类
+
     格式：  class Man(object):                       #定义类,首字母必须大写python3中默认继承object
                 count=0                             #类属性，为类所有，在内存中只创建一次，所有实例都可访问
                 def __init__(self,name,age...):     #此方法为必须,调用Man()会先调用__new__()创建实例,然后调用__init__()初始化实例
@@ -302,12 +316,14 @@ tips about learing python
         引用将不再指向类属性，而会变成一个实例属性如 man.count=5时Man.count不变，man实例中的count属性为5
 
 9、多态和动态语言的鸭子类型
-   多态:一个类的子类，在对其共有属性和方法进行操作时，子类可作为其父类类型进行传递，根据传入的类型不同进行子类的
+
+    多态:一个类的子类，在对其共有属性和方法进行操作时，子类可作为其父类类型进行传递，根据传入的类型不同进行子类的
         动态调用，从而保持了接口在面对不同子类时保持同样的接口，同时还能根据不同动态调用
-   鸭子类型:静态语言如java类型是严格匹配的，在python中并不要求严格的继承关系，一个对象只要看起来想鸭子，即实现了
+    鸭子类型:静态语言如java类型是严格匹配的，在python中并不要求严格的继承关系，一个对象只要看起来想鸭子，即实现了
             对象的某些方法即可当作某种对象进行传递使用(看起来像鸭子，走起路来像鸭子，就可以被当作鸭子)
 
 10、同步IO
+
     流stream是单向的,input stream是从网络/磁盘->内存,output stream内存->网络/磁盘
     由于cpu和内存的存取速度远大于网络或磁盘,所以就出现了同步IO和异步IO
     <1>文件操作(操作系统一般不允许外部直接操作磁盘,一般通过请求系统打开文件对象并通过系统提供的接口进行读取,python在内部进行了封装)
@@ -343,6 +359,7 @@ tips about learing python
                   先创建BytesIO对象f=BytesIO()/二进制作为初始化参数
          之后二者就可以像文件一样使用了
 11、异常
+
     格式：try:                                      #try-except-else异常处理块一般用于依赖外部条件的处理
               可能出现异常的代码块                  #由于外部条件的不定导致可能出现异常，如用户输入、指定文件、网络连接等
           except excption：                       #except块可以有多个用于捕获不同的异常
@@ -372,14 +389,17 @@ tips about learing python
                except Exception as e:
                    logging.exception(e)             #将捕获的错误信息输出到logging
 11、调试
+
     <1>断言assert
         语句:assert 判断表达式, 异常时输出信息               #当表达式为真时是true,否着抛出异常
                                                          #AssertionError，其输出信息为定义
         通过加-O参数来关闭断言
+        
     <2>logging
         logging可以指定记录信息的级别,也可以将信息输出到文件等不同地方
         改变级别:logging.basicConfig(level=logging.INFO/DEBUG/WARNING/ERROR)
         输出:logging.info(信息)/debug()/warning()/error()
+        
     <3>pdb调试
         通过在命令行(python -m pdb 文件名) 来使用pdb调试工具
         import pdb  ->选定地点pdb.set_trace()来设置断点
@@ -388,12 +408,14 @@ tips about learing python
         p 变量名:打印变量值
 
 12、存储python数据结构
+
     使用json存储或读取配置文件等数据信息是比较常用的做法
     首先import json
         json.dump(数据,文件对象)  存储数据到文件中,一般json数据文件以.json后缀(应先打开文件)
         json.load(文件对象)     从文件对象中加载数据
 
 13、代码测试
+
     通过标准库中的unittest库来进行代码测试
     单元测试用于测试函数某个方面，测试用例由多个单元测试组成
     步骤：  先导入unittest库                   import unittest
@@ -420,6 +442,7 @@ tips about learing python
                 assertNotIn(item,list)
 
 14、python解释器
+
     Cpython 默认的自带解释器，用C语言编写
     Ipython 以Cpython为底层的交互性解释器
     pypy    用JIT技术对python代码进行动态编译(代码执行结果可能不同)
@@ -428,6 +451,7 @@ tips about learing python
     在java和.Net平台上最好使用网络调用，确保各程序之间的独立性
 
 15、linux下的python版本切换
+
     使用工具update-alternatives
     update-alternatives --list python3   #列出与python3相关的列表
     如果没有关联，用一下命令关联(2的优先级较高)
