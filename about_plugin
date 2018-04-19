@@ -1,0 +1,19 @@
+一、使用virtualenv为项目创建独立的运行环境
+    1、安装virtualenv
+        pip install virtualenv (默认安装在python安装目录下的Scripts文件夹下，注意添加到path中)
+    2、创建独立运行环境
+        先进入项目主文件夹
+        运行命令: virtualenv --no-site-packages venv
+            -no-site-packages参数使之不复制系统的所有第三方包，python3中不用使用此参数，已经默认
+            -p 安装路径  参数可以指定环境的python版本，默认为系统当前版本
+            创建的新环境被放在当前文件夹的venv子文件夹下，新环境名为venv
+        进入环境: source venv/Scripts/activate (linux下，用source执行scripts文件夹下的activate)
+                 windows下cd 进venv/Scripts 然后执行activate
+                 进入/启动环境后，命令提示符前方会出现venv，此时可以通过pip等进行常规的安装
+                     安装包将会被安装在当前环境文件夹内
+        退出环境:  deactivate (在环境中执行可以退出环境状态)
+        
+    3、python3中默认集成了venv
+        在python3中不需要安装virtualenv环境，可以通过
+            python -m venv myvenv 直接创建独立环境
+            --system-site-packages 参数会复制系统第三方包
