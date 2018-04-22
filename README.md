@@ -311,7 +311,8 @@
            ......
            def method(self, x)
              return super(B,self).method(x)  //python3中可以省略super中的参数
-             
+    
+    
     instance.method(参数列表)  //通过实例调用方法
     class.method(instance,参数列表)  //通过类名调用方法
     实际上第一种调用会转化为第二种，当通过类实例来调用方法时，python会搜索继承树来确定方法所属的类
