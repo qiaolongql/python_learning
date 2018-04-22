@@ -423,7 +423,6 @@
     使用pickle
         pickle模块将内存中的Python对象转化成可以写入任意文件类型的序列化字节流
           也可以根据文件中的序列化字节流重新构建内存中的Python对象
-        
         import pickle
         file = open("filename","wb")  //二进制方式打开文件返回文件描述符
         pickle.dump(对象,file)        //持久化对象到文件中
