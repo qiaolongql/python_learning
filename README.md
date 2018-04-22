@@ -311,8 +311,14 @@
            ......
            def method(self, x)
              return super(B,self).method(x)  //python3中可以省略super中的参数
+             
+    instance.method(参数列表)  //通过实例调用方法
+    class.method(instance,参数列表)  //通过类名调用方法
+    实际上第一种调用会转化为第二种，当通过类实例来调用方法时，python会搜索继承树来确定方法所属的类
+        如果是父类中继承来的方法，则通过父类名调用方法，并传入当前实例的引用。
+        #即用方法所属的类调用方法，然后传入当前实例的引用，从而完成方法调用
     
-    对于类属性，若为不可变类型(number,string,tuple),则在用实例调用类属性并修改时，由于改变了引用，这个
+    对于类属性，若为不可变类型(number,string,tuple),则在用实例调用类属性并修改时，由于改变了引用，这个
         引用将不再指向类属性，而会变成一个实例属性如 man.count=5时Man.count不变，man实例中的count属性为5
 
 13、多态和动态语言的鸭子类型
@@ -431,7 +437,15 @@
         shelve就像一个存储持久化对象的持久化字典，它自动将对象pickle进和出键访问文件系统
             打开shelve文件后你可以像字典一样通过键访问每条记录，shelve会自动分隔记录
             
+        import shelve
+        bob={...}/对象实例
+        sue={...}/对象实例
+        db = shelve.open("shelve_file")  //会创建已shelve_file问文件名的.bak .dir .dat
+        db["bob"] = bob      //shelve会自动pickle化为一条记录{"bob":{...bob对象...}}
+        db["sue"] = sue
         
+        db["bob"]["name"]    //shevle会反pickle出键值为bob的记录
+        db.close()           //关闭shelve对象
 
 18、代码测试
 
