@@ -407,12 +407,31 @@
         n:单步执行下一条代码(默认显示的是要执行的下一条代码) 
         p 变量名:打印变量值
 
-17、存储python数据结构
+17、存储python数据结构(持久化python对象存储)
 
     使用json存储或读取配置文件等数据信息是比较常用的做法
     首先import json
         json.dump(数据,文件对象)  存储数据到文件中,一般json数据文件以.json后缀(应先打开文件)
         json.load(文件对象)     从文件对象中加载数据
+        
+    使用pickle
+        pickle模块将内存中的Python对象转化成可以写入任意文件类型的序列化字节流
+            也可以根据文件中的序列化字节流重新构建内存中的Python对象
+        
+        import pickle
+        file = open("filename","wb")  //二进制方式打开文件返回文件描述符
+        pickle.dump(对象,file)        //持久化对象到文件中
+        对象=pickle.load(file)        //从文件中重构对象
+        file.close()
+        #对于Python的内置数据类型可以直接使用pickle序列化，自定义类对象需要手动处理
+        #使用pickle的缺点是需要一次pickle进或出文件中的所有数据
+        #很多应用程序用网络传输pickle后的Python对象来做为SOAP和XML-RPC等网络服务的简单替代
+        
+    使用shelve
+        shelve就像一个存储持久化对象的持久化字典，它自动将对象pickle进和出键访问文件系统
+            打开shelve文件后你可以像字典一样通过键访问每条记录，shelve会自动分隔记录
+            
+        
 
 18、代码测试
 
