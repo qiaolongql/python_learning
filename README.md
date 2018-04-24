@@ -23,11 +23,12 @@
     python中空值定义为None，真值True，假值False(首字母都大写)
     
     python是动态语言不用声明变量类型，java等是静态语言必须为变量声明类型
-      None是数据类型NoneType的唯一值，可用于不需要返回值的函数的return语句，如print函数
+    None是数据类型NoneType的唯一值，可用于不需要返回值的函数的return语句，如print函数
 ```python
 spam = print("hello")    //打印hello ==> hello
 print(spam)              //打印spam  ==> None
 ```
+
     递归层数较多时会出现栈溢出stackoverflow，可通过for循环替代实现
 
     type(x)返回对象的类型(直接类型)，不适用于父继承链比较    
