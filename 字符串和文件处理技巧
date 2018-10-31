@@ -50,3 +50,47 @@
     可以使用：
         (?:.|\n)*? 添加了对换行的支持，这个模式现在匹配任意字符
         在re.compile()中使用标记re.DOTALL来是.支持\n匹配
+
+7、文本对齐
+    ①、使用str的ljust()左对齐,rjust()右对齐,center()居中
+        参数：
+            期望长度n：一个期望的宽度值
+            填充字符：可选，用于填充剩余宽度值的字符
+    ②、最常用的函数format()或字符串方法str.format()
+        format()函数
+        参数：
+            string：要格式化的字符串
+            选项字符串：'填充字符 对齐方式 期望宽度值'  三者之间没有空格
+                对齐方式：<左对齐 >右对齐 ^居中对齐
+        函数format并不特定于字符串，还可用于数字等任何值，在处理浮点数时可以通过在宽度值后跟
+        .n来指定小数位数，如format(x,'>10.2f') x=1.2345  输出为'      1.23'即期望宽度10右对齐
+        保留两位小数。
+
+        str的format()方法用于在str中做插值和替换处理
+        位置替换：'{0} {1}'.format('hello','world') 输出'hello world'
+            3.1版本之后可以不用输入位置，默认按顺序插入
+        使用字段名：'{name},{age}'.format(name='qiao', age=12) 输出qiao,12
+        使用list: namelist=['qiao','li','wang'], agelist=[12,13,14]
+            '{0[0]},{1[2]}'.format(namelist, agelist) 输出qiao,14
+            使用dict是同list类似
+        同时使用位置和字段时，关键字参数必须位于位置参数之后
+
+8、给字符串中的变量名做插值处理
+    上面提到str的format方法时提到用字段名替换，这里还有另一种方法
+    vars()返回object的属性和属性值的字典对象，当没有参数时返回当前位置的属性和属性值得字典对象
+        有参数时只返回参数的属性和属性值得字典对象
+    如果要替换的值确实能在变量中找到，可以使用format_map()和vars()联合
+    如 name='qiao' age=12 s='my name is {name},my age is {age}'
+        s.format(vars()) 返回'my name is qiao,my age is 12'
+    但是format和format_map共同的缺点是当缺少要替换的某个值时会异常
+
+9、以固定列格式化文本
+    就是说呈现让长文本每行都有固定的列数
+    使用textwrap模块
+    如textwrap.fill(s,70) 以每行70字符的格式返回文本s
+
+10、字符串连接与合并
+    使用str.join()方法可以完成字符串的连接
+    '分隔符'.join(合并对象) 合并对象可以使列表、元组、字典、文件、集合、生成器等数据序列
+    如 part=['my', 'name', 'is', 'qiao']
+        ' '.join(part) 返回'my name is qiao' 分隔符为空格
