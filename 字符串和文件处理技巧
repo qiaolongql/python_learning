@@ -1,0 +1,52 @@
+1、用分隔符拆分字符串
+    ①、字符串对象的split()方法
+        缺陷：不支持多个分隔符，不能处理分隔符附近的空格
+    ②、使用re.split()方法
+        如re.split(r'[;,\s]\s*', line)
+            使用;或,或空格以及其后的一个或多个空格分隔字符串line
+            返回分割后的列表，不包括分隔符
+        re.split(r'(;|,|\s)\s*', line)
+            内部使用分组()时会在分隔后的返回列表中包含分隔符
+            如line='abc d,e;f' 返回列表为['abc', ' ', 'd', ',', 'e', ';', 'f']
+            如果不想在返回列表中包含分隔符，可以使用(?:;|,|\s)来不保存分组
+
+2、开头和结尾匹配
+    开头和结尾匹配一把用于检查文件扩展名和url协议类型
+    ①、使用str.startwith()和str.endwith()
+        这两个方法接受 字符串 或 tuple 作为参数
+        返回True或False
+    ②、使用正则表达式匹配开头和结尾
+
+    对于简单的匹配我们使用字符串对象的方法都可以完成
+
+3、使用shell通配符做字符串匹配
+    在shell下我们经常会使用通配符匹配模式即*.py，date*.csv等等
+    可以使用fnmatch模块下的fnmatch()和fnmatchcase()来执行这样的匹配
+    如fnmatch(string, '*.txt') 或 fnmatchcase(string, '*.txt')
+      用*.txt模式来匹配string，匹配成功返回true
+      fnmatch()使用所使用系统决定是否忽略大小写
+      fnmatchcase()会严格按照提供的大小写进行匹配
+
+4、查找和替换文本
+    ①、str.replace()来进行简单的文本替换
+        如text.replace('X','Mr') 将text中X全部替换为Mr
+    ②使用re.sub()里进行复杂的文本替换
+        re.sub(pattern,repl,string,flags=0)在string中寻找模式pattern用repl进行替换
+        如果要以忽略大小写，可以flags=re.IGNORECASE
+
+5、实现最短匹配的正则表达式
+    由于正则表达式使用贪婪匹配，所以其识别出来的总是最长的可能匹配。如
+        findall(r'\"(.*)\"','say "yes" or say "no"')
+        期望返回：['yes','no']
+        实际返回：['yes" or say "no"']
+    若希望返回的列表是期望返回，我们需要让正则表达式实现最短匹配
+    我们需要在*后面加一个?来实现最短匹配
+        findall(r'\"(.*?)\"',string)
+    
+    *在闭合操作符*或+后面紧跟一个?会强制调整算法为最短的可能匹配
+
+6、多行模式的正则表达式
+    因为.不能匹配换行符，所以要支持多行匹配需要添加对\n的支持
+    可以使用：
+        (?:.|\n)*? 添加了对换行的支持，这个模式现在匹配任意字符
+        在re.compile()中使用标记re.DOTALL来是.支持\n匹配
