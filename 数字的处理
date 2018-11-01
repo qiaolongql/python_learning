@@ -1,0 +1,148 @@
+1、数值取整
+    注意取整和格式化不同，取整是指四舍五入，格式化是直接舍弃或保留
+    内建函数round(value, ndigits)
+        参数：
+            value：要取整的值，可以为浮点数也可以为整数
+            ndigits：正数表示要取整的小数的位数，负数表示要取整到的整数的位数
+    如 round(1.23,1) 返回1.2  
+       round(1.23,2) 返回1.23
+       round(1.26,1) 返回1.3
+       round(1234,-1) 返回1230
+       round(1234,-2) 返回1200
+
+2、使用decimal执行精确的小数计算
+    因为float提供17位的精度，这对于一般的科学和工程类计算已经足够，但对于金融类业务
+    会需要更精确的计算。
+
+    对于float类型计算：
+        a = 4.2
+        b = 2.1
+        a + b   输出6.300000000000001   产生了很小的误差
+
+    如果希望更精确的结果，并且能接受牺牲的性能可以使用decimal:
+        from decimal import Decimal
+        a = Decimal('4.2')
+        b = Decimal('2.1')
+        a + b  返回  Decimal('6.3')
+        print(a + b) 返回6.3
+        *返回的Decimal对象在打印和在字符串格式化函数中使用时和普通数字一样
+
+    decimal模块还可以控制计算中数字的位数以及四舍五入，这需要创建一个
+    本地上下文环境并修改它：
+        from decimal import localcontext
+        a = Decimal('1.3')
+        b = Decimal('1.7')
+        print(a / b)  返回0.76470588...
+        with localcontext() as ctx:   //创建了一个本地上下文环境ctx
+            ctx.prec = 3     //取整三位小数，也可定义更多的小数位
+            print(a / b)    返回0.765  
+
+3、进制转换
+    ①、整数-->二、八、十六进制的文本字符串
+        x = 1234
+        bin(x)      //转换为二进制字符串
+            输出  '0b10011010010'
+        oct(x)      //转换为8进制字符串
+            输出  '0o2322'
+        hex(x)      //转换为16进制字符串
+            输出  '0x4d2'
+        
+        若不想在输出中含有0b、0o、0x可以使用format函数
+        format(x, 'b')/format(x, 'o')/format(x, 'x')
+
+        如果需要产生无符号数值，需要加上最大值来设置比特位长度，以32位为例
+        x = -1234
+        format(2**32 + x, 'x')   输出'fffffb2e'
+    ②、各进制文本串-->整数
+        只需要使用int(字符串，进制)来进行转换即可
+        int('10011010010', 2)  输出1234
+        int('4d2', 16)  输出1234
+
+4、从字节串中打包和解包大整数
+    ①、字节串--->大整数（使用int.from_bytes方法）
+        int.from_bytes(data, '方式')
+            参数：
+                data：要处理的字节串
+                方式：little-->小端方式，低位在前高位在后
+                      big-->大端方式，高位在前低位在后
+    ②、大整数--->字节串（使用int.to_bytes方法）
+        int.to_bytes(nbytes, '方式')
+            参数：
+                nbytes：字节串字节个数
+                方式：little-->小端方式，低位在前高位在后
+                      big-->大端方式，高位在前低位在后
+        nbytes的值有时候不知道，可以使用x.bit_legth()来确定
+
+5、复数运算
+    复数可以通过complex(real, imag)函数来指定，或通过浮点数加后缀j来指定
+        a = complex(2, 4)   //返回复数2+4j
+        b = 3 - 5j    //直接指定
+
+        a.real   //返回2.0，实部
+        a.imag   //返回4.0，虚部
+        a.conjugate()  //返回(2-4j),共轭值
+    所有常见的算数运算都适用于复数
+
+6、关于无穷大inf和NaN
+    显式创建：
+        a = float('inf')    //正无穷大
+        b = float('-inf')   //负无穷大
+        c = float('nan')    //not a number
+    判断：
+        math.isinf(a)   //返回True，判断是否为无穷大
+        math.isnan(c)   //返回True，判断是否为NaN
+        因为任意两个nan是不相等的，所以只能通过此函数判定
+    传播：
+        无穷大值会在数学计算中进行传播
+            inf + number --> inf
+            inf * number --> inf
+            num / inf --> 0.0
+            inf + (-inf) --> nan
+            inf / inf --> nan
+        NaN会通过所有操作进行传播
+
+7、分数计算
+    分数相关的计算需要用到fractions模块
+    导入：
+        from fractions import Fractions
+    实例化：
+        a = Fraction(5,4)     // a=5/4,直接传入分子和分母的形式
+        b = Fraction(3.5)     //b输出Fraction(7,2) 传入浮点数的形式
+        c = Fraction('7/16')  //传入字符串的形式构造分数
+    操作：
+        a.numerator   //返回5，取分子
+        a.denominator  //返回4，取分母
+    特性：
+        · 自动约分，有符号时符号归于分子Fraction(10,-5) --> Fraction(-2,1)
+        · 运算特性：
+            分数 + 分数 --> 分数
+            分数 + 整数 --> 分数
+            分数 + 浮点数 --> 浮点数
+            其它二元运算同加法
+    最大公约数：
+        from fractions import gcd
+        gcd(9,6)  //返回最大公约数3
+
+8、处理大型数组、矩阵的计算
+    参见numpy模块
+
+9、随机问题
+    使用random模块
+    导入：
+        import random
+    ①、产生随机数
+        random.randint(M,N)  //产生一个随机整数X且M<= X <=N
+        random.random()    //产生一个0.0~1.0之间均匀分布的浮点值
+        random.uniform(x,y)   //随机产生一个[x,y)的随机实数
+        random.getrandbits(N)   //产生一个由N个随机比特位所表示的整数
+    ②、序列中的随机操作
+        random.choice(序列)   //从序列中随机挑选出一个元素
+        random.sample(序列，N)  //从序列中随机截取N个元素并作为新序列返回，原序列不变
+        random.shuffle(序列)   //将原序列打乱顺序从新洗牌
+    ③、种子
+        random模块采用马特赛特旋转算法也称梅森旋转算法来计算随机数，这是一个确定性算法
+        也可以通过函数来修改初始种子
+        random.seed()       //基于系统时间或os.urandom()
+        random.seed(12345)     // 基于给出整数
+        random.seed(b'bytedata')   //基于比特数据
+
