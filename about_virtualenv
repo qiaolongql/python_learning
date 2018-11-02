@@ -17,3 +17,10 @@
         在python3中不需要安装virtualenv环境，可以通过
             python -m venv myvenv 直接创建独立环境
             --system-site-packages 参数会复制系统第三方包
+
+二、设置anacoda的pip安装路径
+    使用python -m site 查看相关路径
+    anacoda中相关路径设置在 安装路径\lib\site.py 中定义，设置成
+        USER_SITE = '安装路径\lib\site-packages'
+        USER_BASE = '安装路径\Scripts'
+    之后使用anacoda的pip就会默认安装到上面的路径中
